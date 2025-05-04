@@ -44,6 +44,8 @@ private fun pasteSchematic(schematic: String, location: Var<Position>, player: P
     }
     val schem = SchematicLoader.load(file)
     logger.info("Loaded ${schem.name()} : ${schem.width()}x${schem.height()}x${schem.length()}")
+
+    // Currently : Loaded null : 0x0x0
 }
 
 
