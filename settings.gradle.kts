@@ -6,5 +6,4 @@ pluginManagement {
     }
 }
 
-include(":schematic4j")
 rootProject.name = "SchematicsExtension"

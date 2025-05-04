@@ -42,7 +42,7 @@ private fun pasteSchematic(schematic: String, location: Var<Position>, player: P
     if (!file.exists()) {
         logger.severe("Schematic $schematic not foud at : $path")
     }
-    val schem = SchematicLoader.load(path)
+    val schem = SchematicLoader.load(file)
     logger.info("Loaded ${schem.name()} : ${schem.width()}x${schem.height()}x${schem.length()}")
 }
 
