@@ -4,7 +4,6 @@ import com.sk89q.worldedit.bukkit.BukkitAdapter
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.entries.Var
-import com.typewritermc.engine.paper.logger
 import com.typewritermc.engine.paper.utils.toBukkitLocation
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -12,11 +11,6 @@ import java.io.File
 
 fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Position>, noAir: Boolean) {
     val file = File("plugins/FastAsyncWorldEdit/schematics/$schematic")
-    if (!file.exists()) {
-        logger.severe("Could not load schematic $schematic (Path : ${file.path})")
-        return
-    }
-
     val bukkitLocation = location.get(player).toBukkitLocation()
     val clipboardFormat = ClipboardFormats.findByFile(file) ?: return
 
