@@ -9,21 +9,23 @@ group = "fr.xania"
 version = "0.8.0"
 
 repositories {
-    flatDir {
-        dirs("libs")
-    }
+    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://maven.enginehub.org/repo/")
 }
 
 dependencies {
-    implementation(files("libs/schematic4j.jar"))
+    implementation(platform("com.intellectualsites.bom:bom-newest:1.52"))
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core")
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit") { isTransitive = false }
 }
 
 typewriter {
     namespace = "legendsofxania"
 
     extension {
-        name = "Schematics"
-        shortDescription = "Spawn schematics with Typewriter"
+        name = "FastAsyncWorldEdit"
+        shortDescription = "Spawn FAWE schematics with Typewriter"
         description = """
             |Spawn schematics in your interactions and create
             |beautiful places directly in Typewriter.
@@ -32,7 +34,9 @@ typewriter {
         engineVersion = "0.8.0-beta-158"
         channel = com.typewritermc.moduleplugin.ReleaseChannel.BETA
 
-        paper {}
+        paper {
+            dependency("FastAsyncWorldEdit")
+        }
     }
 }
 

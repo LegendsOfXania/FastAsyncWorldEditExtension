@@ -6,4 +6,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "SchematicsExtension"
+rootProject.name = "FastAsyncWorldEditExtension"
