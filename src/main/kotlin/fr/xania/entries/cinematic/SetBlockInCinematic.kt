@@ -8,11 +8,9 @@ import com.typewritermc.core.extension.annotations.Segments
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.Criteria
 import com.typewritermc.engine.paper.entry.entries.*
-import com.typewritermc.engine.paper.utils.toBukkitLocation
+import fr.xania.utils.resetBlocks
 import fr.xania.utils.setBlockWithPacket
 import org.bukkit.Material
-import org.bukkit.World
-import org.bukkit.block.data.BlockData
 import org.bukkit.entity.Player
 
 @Entry("set_block_in_cinematic", "Set a block for players in cinematic", Colors.BLUE, "material-symbols:cinematic-blur")
@@ -42,17 +40,7 @@ class SetBlockInCinematicAction(
     private val material: Var<Material>,
     private val location: Var<Position>,
 ) : CinematicAction {
-
-    private var originalBlockData: BlockData? = null
-    private var originalWorld: World? = null
-
     override suspend fun setup() {
-        if (originalBlockData == null) {
-            val loc = location.get(player).toBukkitLocation()
-            val block = loc.block
-            originalBlockData = block.blockData.clone()
-            originalWorld = loc.world
-        }
         setBlockWithPacket(player, material, location)
     }
 
@@ -61,10 +49,7 @@ class SetBlockInCinematicAction(
     }
 
     override suspend fun teardown() {
-        val loc = location.get(player).toBukkitLocation()
-        if (originalBlockData != null && originalWorld != null && loc.world == originalWorld) {
-            loc.block.blockData = originalBlockData!!
-        }
+        resetBlocks(player)
     }
 
     override fun canFinish(frame: Int): Boolean = entry.segments canFinishAt frame
