@@ -9,7 +9,7 @@ import fr.xania.utils.pasteSchematicWithPacket
 import fr.xania.utils.resetBlocks
 import org.bukkit.entity.Player
 
-@Entry("paste_schematic_for_audience", "Paste a schematic for players in audience.", Colors.GREEN, "material-symbols:chat-rounded")
+@Entry("paste_schematic_for_audience", "Paste a schematic for players in audience.", Colors.GREEN, "fluent:apps-48-filled")
 class PasteSchematicForAudienceEntry(
     override val id: String = "",
     override val name: String = "",

@@ -25,7 +25,7 @@ import java.io.File
 import java.io.FileInputStream
 
 
-@Entry("paste_schematic", "Paste a schematic at a specific place for all players.", Colors.RED, "material-symbols:touch-app-rounded")
+@Entry("paste_schematic", "Paste a schematic at a specific place for all players.", Colors.RED, "fluent:apps-48-filled")
 class PasteSchematicActionEntry(
     override val id: String = "",
     override val name: String = "",

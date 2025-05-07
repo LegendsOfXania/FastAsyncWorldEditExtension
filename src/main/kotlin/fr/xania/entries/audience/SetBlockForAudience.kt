@@ -11,7 +11,7 @@ import fr.xania.utils.setBlockWithPacket
 import org.bukkit.Material
 import org.bukkit.entity.Player
 
-@Entry("set_block_for_audience", "Set a block for players in audience.", Colors.GREEN, "material-symbols:chat-rounded")
+@Entry("set_block_for_audience", "Set a block for players in audience.", Colors.GREEN, "fluent:cube-add-20-filled")
 class SetBlockForAudienceEntry(
     override val id: String = "",
     override val name: String = "",

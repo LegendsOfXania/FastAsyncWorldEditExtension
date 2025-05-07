@@ -10,12 +10,12 @@ import fr.xania.utils.pasteSchematicWithPacket
 import fr.xania.utils.resetBlocks
 import org.bukkit.entity.Player
 
-@Entry("paste_schematic_in_cinematic", "Paste a schematic for players in cinematic", Colors.BLUE, "material-symbols:cinematic-blur")
+@Entry("paste_schematic_in_cinematic", "Paste a schematic for players in cinematic", Colors.BLUE, "fluent:apps-48-filled")
 class PasteSchematicInCinematicEntry(
     override val id: String = "",
     override val name: String = "",
     override val criteria: List<Criteria> = emptyList(),
-    @Segments(Colors.BLUE, "material-symbols:cinematic-blur")
+    @Segments(Colors.BLUE, "fluent:apps-48-filled")
     val segments: List<PasteSchematicInCinematicSegment> = emptyList(),
     @Help("The name of your schematic. (include the extension of the file)")
     val schematic: String = "",

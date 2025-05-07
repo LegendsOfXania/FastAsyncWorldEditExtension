@@ -13,12 +13,12 @@ import fr.xania.utils.setBlockWithPacket
 import org.bukkit.Material
 import org.bukkit.entity.Player
 
-@Entry("set_block_in_cinematic", "Set a block for players in cinematic", Colors.BLUE, "material-symbols:cinematic-blur")
+@Entry("set_block_in_cinematic", "Set a block for players in cinematic", Colors.BLUE, "fluent:cube-add-20-filled")
 class SetBlockInCinematicEntry(
     override val id: String = "",
     override val name: String = "",
     override val criteria: List<Criteria> = emptyList(),
-    @Segments(Colors.BLUE, "material-symbols:cinematic-blur")
+    @Segments(Colors.BLUE, "fluent:cube-add-20-filled")
     val segments: List<SetBlockInCinematicSegment> = emptyList(),
     @MaterialProperties(MaterialProperty.BLOCK)
     val material: Var<Material> = ConstVar(Material.AIR),
