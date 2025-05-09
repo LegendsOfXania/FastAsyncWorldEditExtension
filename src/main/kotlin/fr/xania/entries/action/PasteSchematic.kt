@@ -42,19 +42,33 @@ class PasteSchematicActionEntry(
     override fun ActionTrigger.execute() {
         val file = File("plugins/FastAsyncWorldEdit/schematics/$schematic")
         val bukkitLocation = location.get(player).toBukkitLocation()
-        val clipboard: Clipboard
         val weWorld = BukkitAdapter.adapt(bukkitLocation.world)
+        val world = bukkitLocation.world!!
 
         val format = ClipboardFormats.findByFile(file)
-        format!!.getReader(FileInputStream(file)).use { reader ->
-            clipboard = reader.read()
+        val clipboard: Clipboard = format!!.getReader(FileInputStream(file)).use { reader ->
+            reader.read()
         }
 
+        val origin = BlockVector3.at(bukkitLocation.x, bukkitLocation.y, bukkitLocation.z)
+        val dimensions = clipboard.dimensions
+        val minX = origin.toVector3().blockX shr 4
+        val maxX = (origin.toVector3().blockX + dimensions.toVector3().blockX) shr 4
+        val minZ = origin.toVector3().blockZ shr 4
+        val maxZ = (origin.toVector3().blockZ + dimensions.toVector3().blockZ) shr 4
+
+        for (chunkX in minX..maxX) {
+            for (chunkZ in minZ..maxZ) {
+                if (!world.isChunkLoaded(chunkX, chunkZ)) {
+                    world.loadChunk(chunkX, chunkZ)
+                }
+            }
+        }
 
         WorldEdit.getInstance().newEditSession(weWorld).use { editSession ->
             val operation: Operation = ClipboardHolder(clipboard)
                 .createPaste(editSession)
-                .to(BlockVector3.at(bukkitLocation.x, bukkitLocation.y, bukkitLocation.z))
+                .to(origin)
                 .ignoreAirBlocks(noAir)
                 .build()
             Operations.complete(operation)
