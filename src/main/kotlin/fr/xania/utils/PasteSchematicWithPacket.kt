@@ -6,6 +6,8 @@ import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.entries.Var
 import com.typewritermc.engine.paper.utils.toBukkitLocation
 import org.bukkit.Bukkit
+import org.bukkit.Location
+import org.bukkit.block.data.BlockData
 import org.bukkit.entity.Player
 import java.io.File
 
@@ -20,6 +22,8 @@ fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Po
         val clipboard = reader.read()
         val origin = clipboard.origin
         val region = clipboard.region
+
+        val blockChanges = mutableMapOf<Location, BlockData>()
 
         for (vector in region) {
             val blockState = clipboard.getFullBlock(vector)
@@ -36,7 +40,12 @@ fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Po
                 modified.add(target.clone())
             }
 
-            player.sendBlockChange(target, Bukkit.createBlockData(material))
+            val blockData = Bukkit.createBlockData(material)
+            blockChanges[target] = blockData
+        }
+
+        if (blockChanges.isNotEmpty()) {
+            player.sendMultiBlockChange(blockChanges)
         }
     }
 }
