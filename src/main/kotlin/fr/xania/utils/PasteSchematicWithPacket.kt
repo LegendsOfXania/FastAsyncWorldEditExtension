@@ -12,8 +12,10 @@ import org.bukkit.entity.Player
 import java.io.File
 
 fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Position>, noAir: Boolean) {
-    val file = File("plugins/FastAsyncWorldEdit/schematics/$schematic")
     val bukkitLocation = location.get(player).toBukkitLocation()
+
+
+    val file = File("plugins/FastAsyncWorldEdit/schematics/$schematic")
     val clipboardFormat = ClipboardFormats.findByFile(file) ?: return
 
     val modified = modifiedBlocks.computeIfAbsent(player.uniqueId) { mutableListOf() }
@@ -35,6 +37,11 @@ fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Po
             val dz = vector.toVector3().blockZ - origin.toVector3().blockZ
 
             val target = bukkitLocation.clone().add(dx.toDouble(), dy.toDouble(), dz.toDouble())
+
+            val chunk = target.chunk
+            if (!chunk.isLoaded) {
+                return
+            }
 
             if (modified.none { it == target }) {
                 modified.add(target.clone())

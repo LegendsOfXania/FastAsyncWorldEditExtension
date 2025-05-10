@@ -12,6 +12,11 @@ fun setBlockWithPacket(player: Player, material: Var<Material>, location: Var<Po
     val block = material.get(player)
     val blockData = Bukkit.createBlockData(block)
 
+    val chunk = bukkitLocation.chunk
+    if (!chunk.isLoaded) {
+        return
+    }
+
     val modified = modifiedBlocks.computeIfAbsent(player.uniqueId) { mutableListOf() }
 
     if (modified.none { it == bukkitLocation }) {
