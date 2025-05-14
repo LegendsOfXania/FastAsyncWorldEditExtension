@@ -40,15 +40,20 @@ class SetBlockInCinematicAction(
     private val material: Var<Material>,
     private val location: Var<Position>,
 ) : CinematicAction {
+
     override suspend fun setup() {}
 
     override suspend fun tick(frame: Int) {
-        setBlockWithPacket(player, material, location)
+        entry.segments.forEach { segment ->
+            if (frame >= segment.startFrame && frame <= segment.endFrame) {
+                setBlockWithPacket(player, material, location)
+            } else if (frame == segment.endFrame + 1) {
+                resetBlocks(player)
+            }
+        }
     }
 
-    override suspend fun teardown() {
-        resetBlocks(player)
-    }
+    override suspend fun teardown() {}
 
     override fun canFinish(frame: Int): Boolean = entry.segments canFinishAt frame
 }

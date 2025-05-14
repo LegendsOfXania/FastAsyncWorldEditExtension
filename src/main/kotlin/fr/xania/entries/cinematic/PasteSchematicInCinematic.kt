@@ -5,7 +5,6 @@ import com.typewritermc.core.extension.annotations.*
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.Criteria
 import com.typewritermc.engine.paper.entry.entries.*
-import com.typewritermc.engine.paper.logger
 import fr.xania.utils.pasteSchematicWithPacket
 import fr.xania.utils.resetBlocks
 import org.bukkit.entity.Player
@@ -21,7 +20,7 @@ class PasteSchematicInCinematicEntry(
     val schematic: String = "",
     @Help("Where the schematic will be placed.")
     val location: Var<Position> = ConstVar(Position.ORIGIN),
-    @Help("Does typewriter need to use -a?")
+    @Help("Does Typewriter need to use -a?")
     val noAir: Boolean = false,
 ) : CinematicEntry {
     override fun create(player: Player): CinematicAction {
@@ -44,12 +43,16 @@ class PasteSchematicInCinematicAction(
     override suspend fun setup() {}
 
     override suspend fun tick(frame: Int) {
-        pasteSchematicWithPacket(player, schematic, location, noAir)
+        entry.segments.forEach { segment ->
+            if (frame >= segment.startFrame && frame <= segment.endFrame) {
+                pasteSchematicWithPacket(player, schematic, location, noAir)
+            } else if (frame == segment.endFrame + 1) {
+                resetBlocks(player)
+            }
+        }
     }
 
-    override suspend fun teardown() {
-        resetBlocks(player)
-    }
+    override suspend fun teardown() {}
 
     override fun canFinish(frame: Int): Boolean = entry.segments canFinishAt frame
 }
