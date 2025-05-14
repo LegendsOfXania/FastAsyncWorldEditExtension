@@ -48,7 +48,6 @@ class PasteSchematicInCinematicAction(
     }
 
     override suspend fun teardown() {
-        logger.info("Starting teardown for $player")
         resetBlocks(player)
     }
 
