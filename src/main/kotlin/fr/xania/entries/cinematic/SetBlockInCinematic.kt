@@ -40,9 +40,7 @@ class SetBlockInCinematicAction(
     private val material: Var<Material>,
     private val location: Var<Position>,
 ) : CinematicAction {
-    override suspend fun setup() {
-        setBlockWithPacket(player, material, location)
-    }
+    override suspend fun setup() {}
 
     override suspend fun tick(frame: Int) {
         setBlockWithPacket(player, material, location)

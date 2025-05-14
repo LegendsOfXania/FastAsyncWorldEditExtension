@@ -41,9 +41,7 @@ class PasteSchematicInCinematicAction(
     private val location: Var<Position>,
     private val noAir: Boolean
 ) : CinematicAction {
-    override suspend fun setup() {
-        pasteSchematicWithPacket(player, schematic, location, noAir)
-    }
+    override suspend fun setup() {}
 
     override suspend fun tick(frame: Int) {
         pasteSchematicWithPacket(player, schematic, location, noAir)
