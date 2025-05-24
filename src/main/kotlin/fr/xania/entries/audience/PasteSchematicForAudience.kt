@@ -5,7 +5,7 @@ import com.typewritermc.core.extension.annotations.Entry
 import com.typewritermc.core.extension.annotations.Help
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.entries.*
-import fr.xania.utils.pasteSchematicWithPacket
+import fr.xania.packets.pasteSchematicWithPacket
 import fr.xania.utils.resetBlocks
 import org.bukkit.entity.Player
 

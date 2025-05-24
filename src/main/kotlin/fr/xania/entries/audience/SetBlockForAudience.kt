@@ -7,7 +7,7 @@ import com.typewritermc.core.extension.annotations.MaterialProperty
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.entries.*
 import fr.xania.utils.resetBlocks
-import fr.xania.utils.setBlockWithPacket
+import fr.xania.packets.setBlockWithPacket
 import org.bukkit.Material
 import org.bukkit.entity.Player
 

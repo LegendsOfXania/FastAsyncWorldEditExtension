@@ -4,7 +4,6 @@ import org.bukkit.Location
 import org.bukkit.entity.Player
 import java.util.*
 
-
 val modifiedBlocks = mutableMapOf<UUID, MutableList<Location>>()
 
 fun resetBlocks(player: Player) {

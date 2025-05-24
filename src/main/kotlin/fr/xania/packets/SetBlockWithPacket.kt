@@ -1,8 +1,9 @@
-package fr.xania.utils
+package fr.xania.packets
 
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.entries.Var
 import com.typewritermc.engine.paper.utils.toBukkitLocation
+import fr.xania.utils.modifiedBlocks
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player

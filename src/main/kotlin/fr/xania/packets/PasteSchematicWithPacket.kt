@@ -1,19 +1,20 @@
-package fr.xania.utils
+package fr.xania.packets
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.entries.Var
 import com.typewritermc.engine.paper.utils.toBukkitLocation
+import fr.xania.utils.modifiedBlocks
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.block.data.BlockData
 import org.bukkit.entity.Player
 import java.io.File
 
+
 fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Position>, noAir: Boolean) {
     val bukkitLocation = location.get(player).toBukkitLocation()
-
 
     val file = File("plugins/FastAsyncWorldEdit/schematics/$schematic")
     val clipboardFormat = ClipboardFormats.findByFile(file) ?: return
@@ -46,7 +47,6 @@ fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Po
             if (modified.none { it == target }) {
                 modified.add(target.clone())
             }
-
             val blockData = Bukkit.createBlockData(material)
             blockChanges[target] = blockData
         }
