@@ -73,8 +73,10 @@ fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Po
             }
         }
 
-        tileEntities.forEach { (pos, baseBlock) ->
-            sendTileEntityUpdate(serverPlayer, serverLevel, pos, baseBlock)
+        ThreadType.SYNC.launch {
+            tileEntities.forEach { (pos, baseBlock) ->
+                sendTileEntityUpdate(serverPlayer, serverLevel, pos, baseBlock)
+            }
         }
     }
 }
@@ -112,44 +114,44 @@ private fun sendTileEntityUpdate(
     pos: BlockPos,
     baseBlock: BaseBlock
 ) {
+    try {
+        val blockState = convertToNMSBlockState(baseBlock)
+        serverLevel.setBlock(pos, blockState, 3)
 
-    ThreadType.SYNC.launch {
-        try {
-            val blockState = convertToNMSBlockState(baseBlock)
-            serverLevel.setBlock(pos, blockState, 3)
+        val blockEntity = serverLevel.getBlockEntity(pos)
+        if (blockEntity != null && baseBlock.nbt != null) {
+            val nbtData = convertWorldEditNBTToMinecraft(baseBlock.nbtData!!)
 
-            val blockEntity = serverLevel.getBlockEntity(pos)
-            if (blockEntity != null && baseBlock.nbt != null) {
-                val nbtData = convertWorldEditNBTToMinecraft(baseBlock.nbtData!!)
+            nbtData.putString("id", blockEntity.type.toString())
+            nbtData.putInt("x", pos.x)
+            nbtData.putInt("y", pos.y)
+            nbtData.putInt("z", pos.z)
 
-                nbtData.putString("id", blockEntity.type.toString())
-                nbtData.putInt("x", pos.x)
-                nbtData.putInt("y", pos.y)
-                nbtData.putInt("z", pos.z)
-
+            try {
+                blockEntity.loadWithComponents(nbtData, serverLevel.registryAccess())
+            } catch (e: Exception) {
                 try {
-                    blockEntity.loadWithComponents(nbtData, serverLevel.registryAccess())
-                } catch (e: Exception) {
-                    try {
-                        blockEntity.loadCustomOnly(nbtData, serverLevel.registryAccess())
-                    } catch (e2: Exception) {
-                        val loadMethod = blockEntity.javaClass.methods.find {
-                            it.name == "load" && it.parameterCount == 2
-                        }
-                        loadMethod?.invoke(blockEntity, nbtData, serverLevel.registryAccess())
+                    blockEntity.loadCustomOnly(nbtData, serverLevel.registryAccess())
+                } catch (e2: Exception) {
+                    val loadMethod = blockEntity.javaClass.methods.find {
+                        it.name == "load" && it.parameterCount == 2
                     }
-                }
-
-                blockEntity.setChanged()
-
-                val packet = ClientboundBlockEntityDataPacket.create(blockEntity)
-                if (packet != null) {
-                    serverPlayer.connection.send(packet)
+                    loadMethod?.invoke(blockEntity, nbtData, serverLevel.registryAccess())
                 }
             }
-        } catch (e: Exception) { }
+
+            blockEntity.setChanged()
+
+            ClientboundBlockEntityDataPacket.create(blockEntity)?.let { packet ->
+                serverPlayer.connection.send(packet)
+            }
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 }
+
+
 
 private fun convertWorldEditNBTToMinecraft(worldEditNBT: com.sk89q.jnbt.CompoundTag): net.minecraft.nbt.CompoundTag {
     val minecraftNBT = net.minecraft.nbt.CompoundTag()
@@ -186,10 +188,7 @@ private fun convertWorldEditNBTToMinecraft(worldEditNBT: com.sk89q.jnbt.Compound
                     minecraftNBT.put(key, listNBT)
                 }
             }
-        } catch (e: Exception) {
-            // Skip problematic NBT entries
-        }
+        } catch (e: Exception) { }
     }
-
     return minecraftNBT
 }
