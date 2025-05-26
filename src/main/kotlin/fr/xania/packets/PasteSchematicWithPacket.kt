@@ -50,9 +50,7 @@ fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Po
             val target = bukkitLocation.clone().add(dx.toDouble(), dy.toDouble(), dz.toDouble())
             val chunk = target.chunk
 
-            if (!chunk.isLoaded) {
-                return
-            }
+            if (!chunk.isLoaded) continue
 
             if (modified.none { it == target }) {
                 modified.add(target.clone())
