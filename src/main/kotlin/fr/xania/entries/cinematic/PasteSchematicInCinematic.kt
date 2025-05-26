@@ -5,7 +5,6 @@ import com.typewritermc.core.extension.annotations.*
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.Criteria
 import com.typewritermc.engine.paper.entry.entries.*
-import com.typewritermc.engine.paper.utils.ThreadType.SYNC
 import fr.xania.packets.pasteSchematicWithPacket
 import fr.xania.utils.resetBlocks
 import org.bukkit.entity.Player
@@ -44,15 +43,12 @@ class PasteSchematicInCinematicAction(
     override suspend fun setup() {}
 
     override suspend fun tick(frame: Int) {
-
-        SYNC.launch {
-            entry.segments.forEach { segment ->
+         entry.segments.forEach { segment ->
                 if (frame >= segment.startFrame && frame <= segment.endFrame) {
                     pasteSchematicWithPacket(player, schematic, location, noAir)
                 } else if (frame == segment.endFrame + 1) {
                     resetBlocks(player)
                 }
-            }
         }
     }
 

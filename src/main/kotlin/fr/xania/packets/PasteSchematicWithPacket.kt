@@ -5,6 +5,7 @@ import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats
 import com.sk89q.worldedit.world.block.BaseBlock
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.entries.Var
+import com.typewritermc.engine.paper.utils.ThreadType
 import com.typewritermc.engine.paper.utils.toBukkitLocation
 import fr.xania.utils.modifiedBlocks
 import net.minecraft.core.BlockPos
@@ -113,40 +114,42 @@ private fun sendTileEntityUpdate(
     pos: BlockPos,
     baseBlock: BaseBlock
 ) {
-    try {
-        val blockState = convertToNMSBlockState(baseBlock)
-        serverLevel.setBlock(pos, blockState, 3)
 
-        val blockEntity = serverLevel.getBlockEntity(pos)
-        if (blockEntity != null && baseBlock.nbt != null) {
-            val nbtData = convertWorldEditNBTToMinecraft(baseBlock.nbtData!!)
+    ThreadType.SYNC.launch {
+        try {
+            val blockState = convertToNMSBlockState(baseBlock)
+            serverLevel.setBlock(pos, blockState, 3)
 
-            nbtData.putString("id", blockEntity.type.toString())
-            nbtData.putInt("x", pos.x)
-            nbtData.putInt("y", pos.y)
-            nbtData.putInt("z", pos.z)
+            val blockEntity = serverLevel.getBlockEntity(pos)
+            if (blockEntity != null && baseBlock.nbt != null) {
+                val nbtData = convertWorldEditNBTToMinecraft(baseBlock.nbtData!!)
 
-            try {
-                blockEntity.loadWithComponents(nbtData, serverLevel.registryAccess())
-            } catch (e: Exception) {
+                nbtData.putString("id", blockEntity.type.toString())
+                nbtData.putInt("x", pos.x)
+                nbtData.putInt("y", pos.y)
+                nbtData.putInt("z", pos.z)
+
                 try {
-                    blockEntity.loadCustomOnly(nbtData, serverLevel.registryAccess())
-                } catch (e2: Exception) {
-                    val loadMethod = blockEntity.javaClass.methods.find {
-                        it.name == "load" && it.parameterCount == 2
+                    blockEntity.loadWithComponents(nbtData, serverLevel.registryAccess())
+                } catch (e: Exception) {
+                    try {
+                        blockEntity.loadCustomOnly(nbtData, serverLevel.registryAccess())
+                    } catch (e2: Exception) {
+                        val loadMethod = blockEntity.javaClass.methods.find {
+                            it.name == "load" && it.parameterCount == 2
+                        }
+                        loadMethod?.invoke(blockEntity, nbtData, serverLevel.registryAccess())
                     }
-                    loadMethod?.invoke(blockEntity, nbtData, serverLevel.registryAccess())
+                }
+
+                blockEntity.setChanged()
+
+                val packet = ClientboundBlockEntityDataPacket.create(blockEntity)
+                if (packet != null) {
+                    serverPlayer.connection.send(packet)
                 }
             }
-
-            blockEntity.setChanged()
-
-            val packet = ClientboundBlockEntityDataPacket.create(blockEntity)
-            if (packet != null) {
-                serverPlayer.connection.send(packet)
-            }
-        }
-    } catch (e: Exception) {
+        } catch (e: Exception) { }
     }
 }
 

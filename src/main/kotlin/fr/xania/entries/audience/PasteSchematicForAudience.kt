@@ -5,7 +5,6 @@ import com.typewritermc.core.extension.annotations.Entry
 import com.typewritermc.core.extension.annotations.Help
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.entries.*
-import com.typewritermc.engine.paper.utils.ThreadType.SYNC
 import fr.xania.packets.pasteSchematicWithPacket
 import fr.xania.utils.resetBlocks
 import org.bukkit.entity.Player
@@ -39,10 +38,8 @@ class PasteSchematicForAudienceDisplay(
     }
 
     override fun tick() {
-        SYNC.launch {
-            players.forEach { player ->
-                pasteSchematicWithPacket(player, schematic, location, noAir)
-            }
+        players.forEach { player ->
+            pasteSchematicWithPacket(player, schematic, location, noAir)
         }
     }
 }
