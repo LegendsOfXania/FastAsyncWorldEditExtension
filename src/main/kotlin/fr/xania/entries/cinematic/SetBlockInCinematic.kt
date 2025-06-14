@@ -13,6 +13,7 @@ import fr.xania.packets.setBlockWithPacket
 import org.bukkit.Material
 import org.bukkit.entity.Player
 
+@Deprecated("Use the typewriter's one instead.")
 @Entry("set_block_in_cinematic", "Set a block for players in cinematic", Colors.BLUE, "fluent:cube-add-20-filled")
 class SetBlockInCinematicEntry(
     override val id: String = "",
