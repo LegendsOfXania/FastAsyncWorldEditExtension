@@ -17,18 +17,18 @@ class PasteSchematicForAudienceEntry(
     val schematic: String = "",
     @Help("Where the schematic will be placed.")
     val location: Var<Position> = ConstVar(Position.ORIGIN),
-    @Help("Does typewriter need to use -a?")
-    val noAir: Boolean = false,
+    @Help("Will air blocks be ignored?")
+    val ignoreAir: Boolean = false,
 ) : AudienceEntry {
     override suspend fun display(): AudienceDisplay {
-        return PasteSchematicForAudienceDisplay(schematic, location, noAir)
+        return PasteSchematicForAudienceDisplay(schematic, location, ignoreAir)
     }
 }
 
 class PasteSchematicForAudienceDisplay(
     private val schematic: String,
     private val location: Var<Position>,
-    private val noAir: Boolean
+    private val ignoreAir: Boolean
 ) : AudienceDisplay(), TickableDisplay {
 
     override fun onPlayerAdd(player: Player) {}
@@ -39,7 +39,7 @@ class PasteSchematicForAudienceDisplay(
 
     override fun tick() {
         players.forEach { player ->
-            pasteSchematicWithPacket(player, schematic, location, noAir)
+            pasteSchematicWithPacket(player, schematic, location, ignoreAir)
         }
     }
 }

@@ -20,11 +20,11 @@ class PasteSchematicInCinematicEntry(
     val schematic: String = "",
     @Help("Where the schematic will be placed.")
     val location: Var<Position> = ConstVar(Position.ORIGIN),
-    @Help("Does Typewriter need to use -a?")
-    val noAir: Boolean = false,
+    @Help("Will air blocks be ignored?")
+    val ignoreAir: Boolean = false,
 ) : CinematicEntry {
     override fun create(player: Player): CinematicAction {
-        return PasteSchematicInCinematicAction(player, this, schematic, location, noAir)
+        return PasteSchematicInCinematicAction(player, this, schematic, location, ignoreAir)
     }
 }
 
@@ -38,14 +38,14 @@ class PasteSchematicInCinematicAction(
     private val entry: PasteSchematicInCinematicEntry,
     private val schematic: String,
     private val location: Var<Position>,
-    private val noAir: Boolean
+    private val ignoreAir: Boolean
 ) : CinematicAction {
     override suspend fun setup() {}
 
     override suspend fun tick(frame: Int) {
          entry.segments.forEach { segment ->
                 if (frame >= segment.startFrame && frame <= segment.endFrame) {
-                    pasteSchematicWithPacket(player, schematic, location, noAir)
+                    pasteSchematicWithPacket(player, schematic, location, ignoreAir)
                 } else if (frame == segment.endFrame + 1) {
                     resetBlocks(player)
                 }

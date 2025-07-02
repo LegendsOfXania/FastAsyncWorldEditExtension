@@ -36,8 +36,8 @@ class PasteSchematicActionEntry(
     val schematic: String = "",
     @Help("Where the schematic will be placed.")
     val location: Var<Position> = ConstVar(Position.ORIGIN),
-    @Help("Does typewriter need to use -a?")
-    val noAir: Boolean = false,
+    @Help("Will air blocks be ignored?")
+    val ignoreAir: Boolean = false,
 ) : ActionEntry {
     override fun ActionTrigger.execute() {
         val file = File("plugins/FastAsyncWorldEdit/schematics/$schematic")
@@ -69,7 +69,7 @@ class PasteSchematicActionEntry(
             val operation: Operation = ClipboardHolder(clipboard)
                 .createPaste(editSession)
                 .to(origin)
-                .ignoreAirBlocks(noAir)
+                .ignoreAirBlocks(ignoreAir)
                 .build()
             Operations.complete(operation)
         }
