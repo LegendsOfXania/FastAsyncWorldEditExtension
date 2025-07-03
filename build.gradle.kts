@@ -5,10 +5,10 @@ repositories {
 }
 
 dependencies {
-    paperweight.paperDevBundle("1.21.3-R0.1-SNAPSHOT")
     implementation(platform("com.intellectualsites.bom:bom-newest:1.52"))
     compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core")
     compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit") { isTransitive = false }
+    paperweight.paperDevBundle("1.21.3-R0.1-SNAPSHOT")
 }
 
 plugins {
@@ -31,7 +31,7 @@ typewriter {
             |beautiful places directly in Typewriter.
             |Created by the Legends of Xania.
             """.trimMargin()
-        engineVersion = "0.9.0-beta-161"
+        engineVersion = "0.9.0-beta-160"
         channel = com.typewritermc.moduleplugin.ReleaseChannel.BETA
 
         paper {
