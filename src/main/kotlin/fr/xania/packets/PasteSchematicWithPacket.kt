@@ -3,10 +3,11 @@ package fr.xania.packets
 import com.sk89q.worldedit.bukkit.BukkitAdapter
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats
 import com.sk89q.worldedit.world.block.BaseBlock
+import com.typewritermc.core.utils.launch
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.entries.Var
-import com.typewritermc.engine.paper.utils.toBukkitLocation
 import com.typewritermc.engine.paper.utils.Sync
+import com.typewritermc.engine.paper.utils.toBukkitLocation
 import fr.xania.utils.modifiedBlocks
 import kotlinx.coroutines.Dispatchers
 import net.minecraft.core.BlockPos
@@ -20,7 +21,7 @@ import org.bukkit.craftbukkit.entity.CraftPlayer
 import org.bukkit.entity.Player
 import java.io.File
 
-fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Position>, noAir: Boolean) {
+fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Position>, ignoreAir: Boolean) {
     val bukkitLocation = location.get(player).toBukkitLocation()
     val file = File("plugins/FastAsyncWorldEdit/schematics/$schematic")
     val clipboardFormat = ClipboardFormats.findByFile(file) ?: return
@@ -42,7 +43,7 @@ fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Po
             val baseBlock = clipboard.getFullBlock(vector)
             val material = BukkitAdapter.adapt(baseBlock.blockType)
 
-            if (noAir && material.isAir) continue
+            if (ignoreAir && material.isAir) continue
 
             val dx = vector.toVector3().blockX - origin.toVector3().blockX
             val dy = vector.toVector3().blockY - origin.toVector3().blockY
@@ -74,7 +75,7 @@ fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Po
             }
         }
 
-        Dispatchers.SYNC.launch {
+        Dispatchers.Sync.launch {
             tileEntities.forEach { (pos, baseBlock) ->
                 sendTileEntityUpdate(serverPlayer, serverLevel, pos, baseBlock)
             }
