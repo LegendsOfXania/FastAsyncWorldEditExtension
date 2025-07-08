@@ -3,13 +3,10 @@ package fr.xania.packets
 import com.sk89q.worldedit.bukkit.BukkitAdapter
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats
 import com.sk89q.worldedit.world.block.BaseBlock
-import com.typewritermc.core.utils.launch
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.entries.Var
-import com.typewritermc.engine.paper.utils.Sync
 import com.typewritermc.engine.paper.utils.toBukkitLocation
 import fr.xania.utils.modifiedBlocks
-import kotlinx.coroutines.Dispatchers
 import net.minecraft.core.BlockPos
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket
