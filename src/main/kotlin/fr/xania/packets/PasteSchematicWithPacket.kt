@@ -75,11 +75,11 @@ fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Po
             }
         }
 
-        Dispatchers.Sync.launch {
+        //Dispatchers.Sync.launch {
             tileEntities.forEach { (pos, baseBlock) ->
                 sendTileEntityUpdate(serverPlayer, serverLevel, pos, baseBlock)
             }
-        }
+        //}
     }
 }
 
