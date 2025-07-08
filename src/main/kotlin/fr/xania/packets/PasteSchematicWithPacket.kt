@@ -10,9 +10,11 @@ import fr.xania.utils.modifiedBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket
-import net.minecraft.server.level.ServerLevel
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.EntityBlock
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
-import org.bukkit.craftbukkit.CraftWorld
 import org.bukkit.craftbukkit.block.data.CraftBlockData
 import org.bukkit.craftbukkit.entity.CraftPlayer
 import org.bukkit.entity.Player
@@ -29,7 +31,6 @@ fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Po
         val origin = clipboard.origin
         val region = clipboard.region
 
-        val serverLevel = (bukkitLocation.world as CraftWorld).handle
         val craftPlayer = player as CraftPlayer
         val serverPlayer = craftPlayer.handle
 
@@ -72,11 +73,9 @@ fun pasteSchematicWithPacket(player: Player, schematic: String, location: Var<Po
             }
         }
 
-        //Dispatchers.Sync.launch {
-            tileEntities.forEach { (pos, baseBlock) ->
-                sendTileEntityUpdate(serverPlayer, serverLevel, pos, baseBlock)
-            }
-        //}
+        tileEntities.forEach { (pos, baseBlock) ->
+            sendTileEntityUpdate(serverPlayer, pos, baseBlock)
+        }
     }
 }
 
@@ -93,70 +92,51 @@ private fun getSectionKey(pos: BlockPos): Long {
 }
 
 private fun sendBlockUpdates(
-    serverPlayer: net.minecraft.server.level.ServerPlayer,
+    serverPlayer: ServerPlayer,
     blocks: List<Pair<BlockPos, BlockState>>
 ) {
     blocks.forEach { (pos, state) ->
-        try {
-            val packet = ClientboundBlockUpdatePacket(pos, state)
-            serverPlayer.connection.send(packet)
-        }
-        catch (e: Exception) {
-            e.printStackTrace()
-        }
+        val packet = ClientboundBlockUpdatePacket(pos, state)
+        serverPlayer.connection.send(packet)
     }
 }
 
 private fun sendTileEntityUpdate(
-    serverPlayer: net.minecraft.server.level.ServerPlayer,
-    serverLevel: ServerLevel,
+    serverPlayer: ServerPlayer,
     pos: BlockPos,
     baseBlock: BaseBlock
 ) {
-    try {
-        val blockState = convertToNMSBlockState(baseBlock)
-        serverLevel.setBlock(pos, blockState, 3)
+    val blockState = convertToNMSBlockState(baseBlock)
 
-        val blockEntity = serverLevel.getBlockEntity(pos)
-        if (blockEntity != null && baseBlock.nbt != null) {
-            val nbtData = convertWorldEditNBTToMinecraft(baseBlock.nbtData!!)
+    serverPlayer.connection.send(ClientboundBlockUpdatePacket(pos, blockState))
 
-            nbtData.putString("id", blockEntity.type.toString())
-            nbtData.putInt("x", pos.x)
-            nbtData.putInt("y", pos.y)
-            nbtData.putInt("z", pos.z)
+    if (baseBlock.nbt != null) {
+        val nbtData = convertWorldEditNBTToMinecraft(baseBlock.nbtData!!)
 
-            try {
-                blockEntity.loadWithComponents(nbtData, serverLevel.registryAccess())
-            } catch (e: Exception) {
-                try {
-                    blockEntity.loadCustomOnly(nbtData, serverLevel.registryAccess())
-                } catch (e2: Exception) {
-                    val loadMethod = blockEntity.javaClass.methods.find {
-                        it.name == "load" && it.parameterCount == 2
-                    }
-                    loadMethod?.invoke(blockEntity, nbtData, serverLevel.registryAccess())
-                }
-            }
+        nbtData.putString("id", blockState.block.builtInRegistryHolder().key().location().toString())
+        nbtData.putInt("x", pos.x)
+        nbtData.putInt("y", pos.y)
+        nbtData.putInt("z", pos.z)
 
-            blockEntity.setChanged()
-
-            ClientboundBlockEntityDataPacket.create(blockEntity)?.let { packet ->
-                serverPlayer.connection.send(packet)
-            }
+        val blockEntityType = getBlockEntityType(blockState.block)
+        if (blockEntityType != null) {
+            val packet = ClientboundBlockEntityDataPacket(pos, blockEntityType, nbtData)
+            serverPlayer.connection.send(packet)
         }
-    } catch (e: Exception) {
-        e.printStackTrace()
     }
 }
 
-
+private fun getBlockEntityType(block: Block): BlockEntityType<*>? {
+    return when (block) {
+        is EntityBlock -> block.newBlockEntity(BlockPos.ZERO, block.defaultBlockState())?.type
+        else -> null
+    }
+}
 
 private fun convertWorldEditNBTToMinecraft(worldEditNBT: com.sk89q.jnbt.CompoundTag): net.minecraft.nbt.CompoundTag {
     val minecraftNBT = net.minecraft.nbt.CompoundTag()
 
     worldEditNBT.value.forEach { (key, value) ->
-        try {
             when (value) {
                 is com.sk89q.jnbt.StringTag -> minecraftNBT.putString(key, value.value)
                 is com.sk89q.jnbt.IntTag -> minecraftNBT.putInt(key, value.value)
@@ -187,7 +167,6 @@ private fun convertWorldEditNBTToMinecraft(worldEditNBT: com.sk89q.jnbt.Compound
                     minecraftNBT.put(key, listNBT)
                 }
             }
-        } catch (e: Exception) { }
     }
     return minecraftNBT
 }
