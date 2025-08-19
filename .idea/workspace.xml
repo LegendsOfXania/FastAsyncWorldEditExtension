@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6761522f-8b5f-429c-be7a-601baf3cf1d0" name="Changes" comment="Support for Typewriter beta 163">
-      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,10 +194,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.FastAsyncWorldEditExtension [wrapper]" />
       <item itemvalue="Gradle.FastAsyncWorldEditExtension [build]" />
-      <item itemvalue="Gradle.FastAsyncWorldEditExtension [clean]" />
       <item itemvalue="Gradle.FastAsyncWorldEditExtension [cleanCache]" />
+      <item itemvalue="Gradle.FastAsyncWorldEditExtension [clean]" />
+      <item itemvalue="Gradle.FastAsyncWorldEditExtension [wrapper]" />
     </list>
     <recent_temporary>
       <list>
@@ -258,7 +256,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752141925825</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Support for Typewriter beta 163">
+      <option name="closed" value="true" />
+      <created>1753725399170</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1753725399170</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

@@ -1,18 +1,24 @@
 plugins {
-    kotlin("jvm") version "2.0.21"
+    /* Kotlin */
+    kotlin("jvm") version "2.2.10"
+    /* paperweight */
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.18"
-    id("com.typewritermc.module-plugin") version "1.3.0"
+    /* Typewriter */
+    id("com.typewritermc.module-plugin") version "2.0.0"
 }
 
 repositories {
+    /* FAWE */
     maven("https://maven.enginehub.org/repo/")
 }
 
 
 dependencies {
+    /* FAWE */
     implementation(platform("com.intellectualsites.bom:bom-newest:1.52"))
     compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core")
     compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit") { isTransitive = false }
+    /* paperweight */
     paperweight.paperDevBundle("1.21.8-R0.1-SNAPSHOT")
 }
 
@@ -31,7 +37,7 @@ typewriter {
             |beautiful places directly in Typewriter.
             |Created by the Legends of Xania.
             """.trimMargin()
-        engineVersion = "0.9.0-beta-163"
+        engineVersion = "0.9.0-beta-164"
         channel = com.typewritermc.moduleplugin.ReleaseChannel.BETA
 
         paper {
