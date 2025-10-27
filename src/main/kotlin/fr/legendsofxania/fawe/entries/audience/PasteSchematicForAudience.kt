@@ -1,12 +1,12 @@
-package fr.xania.entries.audience
+package fr.legendsofxania.fawe.entries.audience
 
 import com.typewritermc.core.books.pages.Colors
 import com.typewritermc.core.extension.annotations.Entry
 import com.typewritermc.core.extension.annotations.Help
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.entries.*
-import fr.xania.packets.pasteSchematicWithPacket
-import fr.xania.utils.resetBlocks
+import fr.legendsofxania.fawe.packets.pasteSchematicWithPacket
+import fr.legendsofxania.fawe.utils.resetBlocks
 import org.bukkit.entity.Player
 
 @Entry("paste_schematic_for_audience", "Paste a schematic for players in audience.", Colors.GREEN, "fluent:apps-48-filled")

@@ -1,4 +1,4 @@
-package fr.xania.entries.cinematic
+package fr.legendsofxania.fawe.entries.cinematic
 
 import com.typewritermc.core.books.pages.Colors
 import com.typewritermc.core.extension.annotations.Entry
@@ -8,8 +8,8 @@ import com.typewritermc.core.extension.annotations.Segments
 import com.typewritermc.core.utils.point.Position
 import com.typewritermc.engine.paper.entry.Criteria
 import com.typewritermc.engine.paper.entry.entries.*
-import fr.xania.utils.resetBlocks
-import fr.xania.packets.setBlockWithPacket
+import fr.legendsofxania.fawe.utils.resetBlocks
+import fr.legendsofxania.fawe.packets.setBlockWithPacket
 import org.bukkit.Material
 import org.bukkit.entity.Player
 
