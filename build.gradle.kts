@@ -4,7 +4,7 @@ plugins {
     /* paperweight */
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.18"
     /* Typewriter */
-    id("com.typewritermc.module-plugin") version "2.0.0"
+    id("com.typewritermc.module-plugin") version "2.1.0"
 }
 
 repositories {
@@ -37,7 +37,7 @@ typewriter {
             |beautiful places directly in Typewriter.
             |Created by the Legends of Xania.
             """.trimMargin()
-        engineVersion = "0.9.0-beta-166"
+        engineVersion = "0.9.0-beta-167"
         channel = com.typewritermc.moduleplugin.ReleaseChannel.BETA
 
         paper {
