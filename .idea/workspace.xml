@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6761522f-8b5f-429c-be7a-601baf3cf1d0" name="Changes" comment="Support for Typewriter beta 166">
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+    <list default="true" id="6761522f-8b5f-429c-be7a-601baf3cf1d0" name="Changes" comment="Refactor PasteSchematicActionEntry">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/fr/xania/entries/action/PasteSchematic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/fr/legendsofxania/fawe/entries/action/PasteSchematicActionEntry.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/fr/xania/entries/audience/PasteSchematicForAudience.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/fr/legendsofxania/fawe/entries/audience/PasteSchematicForAudience.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/fr/xania/entries/audience/SetBlockForAudience.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/fr/legendsofxania/fawe/entries/audience/SetBlockForAudience.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/fr/xania/entries/cinematic/PasteSchematicInCinematic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/fr/legendsofxania/fawe/entries/cinematic/PasteSchematicInCinematic.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/fr/xania/entries/cinematic/SetBlockInCinematic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/fr/legendsofxania/fawe/entries/cinematic/SetBlockInCinematic.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/fr/xania/packets/PasteSchematicWithPacket.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/fr/legendsofxania/fawe/packets/PasteSchematicWithPacket.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/fr/xania/packets/SetBlockWithPacket.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/fr/legendsofxania/fawe/packets/SetBlockWithPacket.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/fr/xania/utils/ResetBlocks.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/fr/legendsofxania/fawe/utils/ResetBlocks.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +30,28 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="FastAsyncWorldEditExtension" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FastAsyncWorldEditExtension" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FastAsyncWorldEditExtension" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FastAsyncWorldEditExtension" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FastAsyncWorldEditExtension" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
               </path>
             </expand>
             <select />
@@ -80,6 +94,7 @@
   &quot;keyToString&quot;: {
     &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.FastAsyncWorldEditExtension [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.FastAsyncWorldEditExtension [cleanAllPaperweightUserdevCaches].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.FastAsyncWorldEditExtension [cleanCache].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.FastAsyncWorldEditExtension [clean].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.FastAsyncWorldEditExtension [wrapper].executor&quot;: &quot;Run&quot;,
@@ -89,7 +104,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/dhaus/Documents/Code/Typewriter/FastAsyncWorldEditExtension&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;discord-application&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
 }</component>
   <component name="RunAnythingCache">
@@ -112,6 +127,28 @@
         <option name="taskNames">
           <list>
             <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="FastAsyncWorldEditExtension [cleanAllPaperweightUserdevCaches]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="cleanAllPaperweightUserdevCaches" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -188,11 +225,8 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
     <list>
+      <item itemvalue="Gradle.FastAsyncWorldEditExtension [cleanAllPaperweightUserdevCaches]" />
       <item itemvalue="Gradle.FastAsyncWorldEditExtension [build]" />
       <item itemvalue="Gradle.FastAsyncWorldEditExtension [cleanCache]" />
       <item itemvalue="Gradle.FastAsyncWorldEditExtension [clean]" />
@@ -202,6 +236,7 @@
       <list>
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [build]" />
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [clean]" />
+        <item itemvalue="Gradle.FastAsyncWorldEditExtension [cleanAllPaperweightUserdevCaches]" />
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [wrapper]" />
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [cleanCache]" />
       </list>
@@ -271,7 +306,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759157058038</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Refactor PasteSchematicActionEntry">
+      <option name="closed" value="true" />
+      <created>1761561372608</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1761561372608</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -282,6 +325,7 @@
     <MESSAGE value="Suppot for Typewriter beta 162" />
     <MESSAGE value="Support for Typewriter beta 163" />
     <MESSAGE value="Support for Typewriter beta 166" />
-    <option name="LAST_COMMIT_MESSAGE" value="Support for Typewriter beta 166" />
+    <MESSAGE value="Refactor PasteSchematicActionEntry" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor PasteSchematicActionEntry" />
   </component>
 </project>
