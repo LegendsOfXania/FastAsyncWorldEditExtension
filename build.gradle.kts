@@ -12,16 +12,14 @@ repositories {
     maven("https://maven.enginehub.org/repo/")
 }
 
-
 dependencies {
     /* FAWE */
-    implementation(platform("com.intellectualsites.bom:bom-newest:1.52"))
+    implementation(platform("com.intellectualsites.bom:bom-newest:1.55"))
     compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core")
     compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit") { isTransitive = false }
     /* paperweight */
     paperweight.paperDevBundle("1.21.8-R0.1-SNAPSHOT")
 }
-
 
 group = "fr.xania"
 version = "0.9.0"

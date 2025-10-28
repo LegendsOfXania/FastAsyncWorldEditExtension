@@ -1,4 +1,4 @@
-package fr.xania.utils
+package fr.legendsofxania.fawe.utils
 
 import org.bukkit.Location
 import org.bukkit.block.data.BlockData
