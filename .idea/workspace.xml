@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6761522f-8b5f-429c-be7a-601baf3cf1d0" name="Changes" comment="Refactor PasteSchematicActionEntry">
+    <list default="true" id="6761522f-8b5f-429c-be7a-601baf3cf1d0" name="Changes" comment="Update Typewriter">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
     </list>
@@ -114,7 +114,7 @@
       <command value="gradle build --scan" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.FastAsyncWorldEditExtension [build]">
+  <component name="RunManager">
     <configuration name="FastAsyncWorldEditExtension [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -234,8 +234,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.FastAsyncWorldEditExtension [build]" />
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [clean]" />
+        <item itemvalue="Gradle.FastAsyncWorldEditExtension [build]" />
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [cleanAllPaperweightUserdevCaches]" />
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [wrapper]" />
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [cleanCache]" />
@@ -314,7 +314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761561372608</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Update Typewriter">
+      <option name="closed" value="true" />
+      <created>1761670405904</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1761670405904</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -326,6 +334,15 @@
     <MESSAGE value="Support for Typewriter beta 163" />
     <MESSAGE value="Support for Typewriter beta 166" />
     <MESSAGE value="Refactor PasteSchematicActionEntry" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor PasteSchematicActionEntry" />
+    <MESSAGE value="Update Typewriter" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Typewriter" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>

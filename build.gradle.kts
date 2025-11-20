@@ -35,7 +35,7 @@ typewriter {
             |beautiful places directly in Typewriter.
             |Created by the Legends of Xania.
             """.trimMargin()
-        engineVersion = "0.9.0-beta-167"
+        engineVersion = "0.9.0-beta-168"
         channel = com.typewritermc.moduleplugin.ReleaseChannel.BETA
 
         paper {
