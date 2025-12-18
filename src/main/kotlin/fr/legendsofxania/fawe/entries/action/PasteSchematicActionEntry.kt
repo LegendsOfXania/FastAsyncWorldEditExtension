@@ -41,10 +41,10 @@ class PasteSchematicActionEntry(
             ?.getReader(file.inputStream())
             ?.read() ?: return
 
-        val bukkitLoc = location.get(player, context).toBukkitLocation()
-        val origin = BlockVector3.at(bukkitLoc.x, bukkitLoc.y, bukkitLoc.z)
+        val bukkitLocation = location.get(player, context).toBukkitLocation()
+        val origin = BlockVector3.at(bukkitLocation.x, bukkitLocation.y, bukkitLocation.z)
 
-        worldEdit.newEditSession(BukkitAdapter.adapt(bukkitLoc.world)).use { session ->
+        worldEdit.newEditSession(BukkitAdapter.adapt(bukkitLocation.world)).use { session ->
             val holder = ClipboardHolder(clipboard).apply {
                 if (rotation != 0) {
                     transform = transform.combine(AffineTransform().rotateY(rotation.toDouble()))

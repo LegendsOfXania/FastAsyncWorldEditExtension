@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6761522f-8b5f-429c-be7a-601baf3cf1d0" name="Changes" comment="Update Typewriter">
+    <list default="true" id="6761522f-8b5f-429c-be7a-601baf3cf1d0" name="Changes" comment="Update Typewriter (again :p)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/fr/legendsofxania/fawe/entries/action/PasteSchematicActionEntry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/fr/legendsofxania/fawe/entries/action/PasteSchematicActionEntry.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +116,7 @@
       <command value="gradle build --scan" />
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.FastAsyncWorldEditExtension [build]">
     <configuration name="FastAsyncWorldEditExtension [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -234,8 +236,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.FastAsyncWorldEditExtension [clean]" />
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [build]" />
+        <item itemvalue="Gradle.FastAsyncWorldEditExtension [clean]" />
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [cleanAllPaperweightUserdevCaches]" />
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [wrapper]" />
         <item itemvalue="Gradle.FastAsyncWorldEditExtension [cleanCache]" />
@@ -322,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761670405904</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Update Typewriter">
+      <option name="closed" value="true" />
+      <created>1763659053608</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1763659053608</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -335,7 +345,8 @@
     <MESSAGE value="Support for Typewriter beta 166" />
     <MESSAGE value="Refactor PasteSchematicActionEntry" />
     <MESSAGE value="Update Typewriter" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Typewriter" />
+    <MESSAGE value="Update Typewriter (again :p)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Typewriter (again :p)" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
